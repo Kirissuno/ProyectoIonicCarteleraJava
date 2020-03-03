@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text="Volver" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <span>Carrito</span>
+      <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<hr>
+<input type="text" [(ngModel)]="gameToFilter" (change)="change()" placeholder="Título o Compañía a buscar" style="text-align: center;">
+<hr>
+<ion-content *ngIf="videogamesFiltered.length == 0" class="contenido">
+  <ion-card *ngFor="let game of videogames">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="game.urlImage">
+      </ion-avatar>
+      <ion-label>
+        <h3 [innerHTML]="game.director"></h3>
+        <p [innerHTML]="game.fecha"></p>
+      </ion-label>
+    </ion-item>
+  
+    <img [src]="game.urlImage" alt="ion">
+    <ion-card-header>
+      <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
+    </ion-card-header>
+    <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
+  
+    <ion-footer>
+      <ion-row align="center">
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="cash-outline"></ion-icon>
+            <div [innerHTML]="game.precio + ' €'"></div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="document-text-outline"></ion-icon>
+            <div>Comentarios</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="cart-outline"></ion-icon>
+            <div>Añadir al carrito</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="videogamesFiltered.length > 0" class="contenido">
+  <ion-card *ngFor="let game of videogamesFiltered">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="game.urlImage">
+      </ion-avatar>
+      <ion-label>
+        <h3 [innerHTML]="game.director"></h3>
+        <p [innerHTML]="game.fecha"></p>
+      </ion-label>
+    </ion-item>
+  
+    <img [src]="game.urlImage" alt="ion">
+    <ion-card-header>
+      <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
+    </ion-card-header>
+    <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
+  
+    <ion-footer>
+      <ion-row align="center">
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="cash-outline"></ion-icon>
+            <div [innerHTML]="game.precio + ' €'"></div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="document-text-outline"></ion-icon>
+            <div>Comentarios</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button>
+            <ion-icon name="cart-outline"></ion-icon>
+            <div>Añadir al carrito</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+</ion-content>
