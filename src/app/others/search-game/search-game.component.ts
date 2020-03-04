@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Videogame } from 'src/app/models/videogame';
 import { VideogameServiceService } from 'src/app/services/videogame-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController, ToastController } from '@ionic/angular';
+import { ModalNewEditGameComponent } from '../modal-new-edit-game/modal-new-edit-game.component';
+import { ShopCartService } from 'src/app/services/shop-cart.service';
+import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/models/user';
 
 
 
@@ -15,10 +20,18 @@ export class SearchGameComponent implements OnInit {
   gameToFilter : string;
   noResult : boolean = false;
   videogamesFiltered : Videogame[];
+  loggedUser : User;
+  isLogged : boolean = false;
+  isAdmin : boolean = false;
 
   constructor(
     private videogameService : VideogameServiceService,
     private router : Router,
+    private modalController: ModalController,
+    private route : ActivatedRoute,
+    private shoppingService : ShopCartService,
+    private toastCtrl : ToastController,
+    private loginService : LoginService
   ) {
     this.videogames = [];
     this.videogamesFiltered = [];
@@ -31,6 +44,13 @@ export class SearchGameComponent implements OnInit {
     })
     this.noResult = false;
     this.videogamesFiltered = [];
+    this.isLogged = this.loginService.logged;
+    if(this.isLogged){
+      this.loggedUser = this.loginService.user;
+      if(this.loggedUser.rol == 'admin'){
+        this.isAdmin = true;
+      }
+    }
   }
 
   change(){    
@@ -63,11 +83,41 @@ export class SearchGameComponent implements OnInit {
   }
 
   goToCart(){
-    
+    this.router.navigate(["/tabs/tab3"]);
   }
 
-  sinStock(){
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalNewEditGameComponent,
+      componentProps: {
+        titulo: this.route.snapshot.params["titulo"]
+      }
+    });
+    return await modal.present();
+  }
 
+  addToCart(game:Videogame){
+    
+    this.shoppingService.getByGameAndUser('admin', game.titulo).subscribe( data=> {
+      if(data == null || data == undefined){
+        this.shoppingService.addGame('admin', game.titulo).subscribe();
+      }else{
+        this.shoppingService.oneMore('admin', game.titulo).subscribe();
+      }
+      this.toastCtrl.create({
+        animated: true,
+        duration: 2000,
+        position: 'bottom',
+        message: 'Videojuego añadido al carrito',
+      }).then(toastEl =>
+        toastEl.present()
+      )
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 2000);
+    } )
+
+   
   }
 
 }

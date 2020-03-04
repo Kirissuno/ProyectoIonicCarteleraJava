@@ -16,18 +16,16 @@
       <ion-col>
         <h3>Están por llegar</h3>
         <ion-list class="bg-transparent">
-          <ion-item-sliding style="margin-top: 5px; margin-bottom: 5px;" *ngFor="let game of upcomming" #slidingItem>
-            <ion-item color="none" (click)="goToDetails(game)" detail>
-              <ion-thumbnail slot="start">
-                <ion-img [src]="game.urlImage"></ion-img>
-              </ion-thumbnail>
-              <ion-label>
-                <h4 style="font-size: 24px;" [innerHTML]="game.titulo"></h4>
-                <h6 [innerHTML]="game.descripcion"></h6>
-                <p style="text-align: right;" [innerHTML]="game.precio + ' €'"></p>
-              </ion-label>
-            </ion-item>
-          </ion-item-sliding>
+          <ion-item style="margin-top: 5px; margin-bottom: 5px;" color="none" *ngFor="let game of upcomming">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="game.urlImage"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h4 style="font-size: 24px;" [innerHTML]="game.titulo"></h4>
+              <h6 [innerHTML]="game.descripcion"></h6>
+              <h5 style="text-align: right;">{{game.fecha}}</h5>
+            </ion-label>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -36,19 +34,17 @@
       <ion-col>
         <h3>Novedades</h3>
         <ion-list class="bg-transparent">
-          <ion-item-sliding style="margin-top: 5px; margin-bottom: 5px;" *ngFor="let game of latest" #slidingItem>
-            <ion-item color="none" (click)="goToDetails(game)" detail>
-              <ion-thumbnail slot="start">
-                <ion-img [src]="game.urlImage"></ion-img>
-              </ion-thumbnail>
-              <ion-label>
-                <h4 style="font-size: 24px;" [innerHTML]="game.titulo"></h4>
-                <h6 [innerHTML]="game.descripcion"></h6>
-
-                <p style="text-align: right;" [innerHTML]="game.precio + ' €'"></p>
-              </ion-label>
-            </ion-item>
-          </ion-item-sliding>
+          <ion-item style="margin-top: 5px; margin-bottom: 5px;" color="none" *ngFor="let game of latest">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="game.urlImage"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h4 style="font-size: 24px;" [innerHTML]="game.titulo"></h4>
+              <h6 [innerHTML]="game.descripcion"></h6>
+              <h5 style="text-align: right;">{{game.fecha}}</h5>
+              <h5 style="text-align: right;"><b>Precio: {{game.precio}}€</b></h5>
+            </ion-label>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>

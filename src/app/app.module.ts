@@ -10,13 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchGameComponent } from './others/search-game/search-game.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsGameComponent } from './others/details-game/details-game.component';
+import { ModalNewEditGameComponent } from './others/modal-new-edit-game/modal-new-edit-game.component';
+import { RegisterComponent } from './others/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchGameComponent, DetailsGameComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  declarations: [AppComponent, SearchGameComponent, DetailsGameComponent, ModalNewEditGameComponent, RegisterComponent],
+  entryComponents: [ModalNewEditGameComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -24,4 +26,4 @@ import { DetailsGameComponent } from './others/details-game/details-game.compone
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

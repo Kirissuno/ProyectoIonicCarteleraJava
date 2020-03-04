@@ -1,16 +1,45 @@
 <ion-header>
   <ion-toolbar class="header">
-    <ion-title color="dark">Perfil</ion-title>
+    <ion-title color="dark" *ngIf="!logged">Login</ion-title>
+    <ion-title color="dark" *ngIf="logged">Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content class="contenido">
+<ion-content class="contenido" *ngIf="!logged">
+  <form #form="ngForm" (ngSubmit)="login(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          <div padding style="padding-top: 200px">
+            <ion-item>
+              <ion-input name="usuario" type="text" placeholder="Usuario" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="contrasena" type="password" placeholder="Contraseña" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Log In</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <h3>Están por llegar</h3>
+      <ion-col align="center">
+        <p style="color: white;">¿No tienes una cuenta? <span (click)="toRegister()"
+            style="color: black; font-weight: bold; font-size: 20px;">Regístrate</span></p>
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="logged" class="contenido">
+  <h2 style="color: white;">Bienvenido {{user.usuario}}</h2>
+  <div padding>
+    <ion-button size="large" (click)="logOut()" expand="block">Log Out</ion-button>
+  </div>
 </ion-content>
