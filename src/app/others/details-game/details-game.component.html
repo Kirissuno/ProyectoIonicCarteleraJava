@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-buttons (click)="goBack()" slot="start">
+      <ion-button>
+        <ion-icon color="light" slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <span style="padding-top: 2%; color: white; font-size: 14px;">VOLVER</span>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contenido">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>{{ videogame.titulo }}</h3>
+        <ion-card>
+          <img [src]="videogame.urlImage" width="100%" />
+          <ion-card-header>
+            <h4>Descripción</h4>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ videogame.descripcion }}</p>
+            <p align="right">Fecha de salida: {{videogame.fecha}}</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <h4>Comentarios</h4>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngFor="let comment of comments">
+              <p>{{comment.comentario}}</p>
+              <p align="right">by: {{comment.usuario}}</p>
+              <hr color="black">
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <h4>Comprar</h4>
+          </ion-card-header>
+          <ion-card-content align="center">
+            <p *ngIf="videogame.stock > 0">Stock: {{videogame.stock}}</p>
+            <p *ngIf="videogame.stock == 0">Sin Stock</p>
+            <p *ngIf="videogame.stock == null">Pendiente de lanzamiento</p>
+            <hr *ngIf="videogame.precio != null && videogame.stock != null">
+            <p *ngIf="videogame.precio != null && videogame.stock != null">Precio: {{videogame.precio}}€</p>
+            <hr>
+            <ion-button *ngIf="videogame.stock > 0">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button style="--background:gray" *ngIf="videogame.stock == 0">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button style="--background:gray" *ngIf="videogame.stock == null">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

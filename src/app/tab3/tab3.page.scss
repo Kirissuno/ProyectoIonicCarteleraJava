@@ -1,3 +1,20 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.header {
+  --background: rgb(0, 179, 185);
+}
+
+.contenido {
+  --background: #fff url('https://newwallpaperdownload.com/wallpapers/Galaxy-Wallpaper-On-Wallpaper-Hd.jpg') no-repeat center center / cover;
+}
+
+.bg-transparent {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+h3{
+  color: white;
+  font-weight: bold;
+}

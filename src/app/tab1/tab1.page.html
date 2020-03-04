@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar class="header">
     <ion-title color="dark">Noticias</ion-title>
-    <ion-buttons slot="end">
-      <span style="padding-top: 5%;">Buscar</span>
-      <ion-button (click)="goToSearch()">
+    <ion-buttons (click)="goToSearch()" slot="end">
+      <span style="padding-top: 5%;color: white;">Buscar</span>
+      <ion-button>
         <ion-icon color="light" slot="icon-only" name="search-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
         <h3>Están por llegar</h3>
         <ion-list class="bg-transparent">
           <ion-item-sliding style="margin-top: 5px; margin-bottom: 5px;" *ngFor="let game of upcomming" #slidingItem>
-            <ion-item color="none" (click)="goToDetails(restaurante)" detail>
+            <ion-item color="none" (click)="goToDetails(game)" detail>
               <ion-thumbnail slot="start">
                 <ion-img [src]="game.urlImage"></ion-img>
               </ion-thumbnail>
@@ -37,7 +37,7 @@
         <h3>Novedades</h3>
         <ion-list class="bg-transparent">
           <ion-item-sliding style="margin-top: 5px; margin-bottom: 5px;" *ngFor="let game of latest" #slidingItem>
-            <ion-item color="none" (click)="goToDetails(restaurante)" detail>
+            <ion-item color="none" (click)="goToDetails(game)" detail>
               <ion-thumbnail slot="start">
                 <ion-img [src]="game.urlImage"></ion-img>
               </ion-thumbnail>

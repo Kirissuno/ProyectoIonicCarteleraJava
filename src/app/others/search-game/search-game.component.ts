@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Videogame } from 'src/app/models/videogame';
 import { VideogameServiceService } from 'src/app/services/videogame-service.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-search-game',
@@ -15,6 +18,7 @@ export class SearchGameComponent implements OnInit {
 
   constructor(
     private videogameService : VideogameServiceService,
+    private router : Router,
   ) {
     this.videogames = [];
     this.videogamesFiltered = [];
@@ -29,9 +33,7 @@ export class SearchGameComponent implements OnInit {
     this.videogamesFiltered = [];
   }
 
-  change(){
-    console.log(this.gameToFilter);
-    
+  change(){    
     this.videogamesFiltered = [];
     //Comprobamos que el buscador no esté vacío, esté null o indefinido
     if(this.gameToFilter.trim() != "" || this.gameToFilter != null || this.gameToFilter != undefined){
@@ -54,6 +56,18 @@ export class SearchGameComponent implements OnInit {
         }
       })
     }    
+  }
+
+  goToDetails(game: string){
+    this.router.navigate(["/details", game])
+  }
+
+  goToCart(){
+    
+  }
+
+  sinStock(){
+
   }
 
 }

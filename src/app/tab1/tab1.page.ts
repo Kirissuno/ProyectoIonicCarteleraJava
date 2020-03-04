@@ -31,4 +31,9 @@ export class Tab1Page {
     this.router.navigate(["/search"])
   }
 
+  goToDetails(game: Videogame){
+    console.log(game);
+    
+  }
+
 }

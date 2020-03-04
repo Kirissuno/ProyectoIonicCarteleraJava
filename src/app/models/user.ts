@@ -1,5 +1,5 @@
-export interface User{
-    usuario : string,
-	contrasena : string,
-    rol : string
+export class User{
+    usuario : string;
+	contrasena : string;
+    rol : string;
 }

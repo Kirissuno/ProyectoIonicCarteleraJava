@@ -11,9 +11,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchGameComponent } from './others/search-game/search-game.component';
 import { FormsModule } from '@angular/forms';
+import { DetailsGameComponent } from './others/details-game/details-game.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchGameComponent],
+  declarations: [AppComponent, SearchGameComponent, DetailsGameComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

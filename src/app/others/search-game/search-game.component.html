@@ -4,50 +4,63 @@
       <ion-back-button color="light" text="Volver" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <span>Carrito</span>
-      <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+      <span style="padding-top: 5%; color: white;">Carrito</span>
+      <ion-button (click)="goToCart()">
+        <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<hr>
-<input type="text" [(ngModel)]="gameToFilter" (change)="change()" placeholder="Título o Compañía a buscar" style="text-align: center;">
-<hr>
+
+<hr />
+<input type="text" [(ngModel)]="gameToFilter" (change)="change()" placeholder="Título o Compañía a buscar"
+  style="text-align: center;" />
+<hr />
 <ion-content *ngIf="videogamesFiltered.length == 0" class="contenido">
   <ion-card *ngFor="let game of videogames">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img [src]="game.urlImage">
-      </ion-avatar>
-      <ion-label>
-        <h3 [innerHTML]="game.director"></h3>
-        <p [innerHTML]="game.fecha"></p>
-      </ion-label>
-    </ion-item>
-  
-    <img [src]="game.urlImage" alt="ion">
-    <ion-card-header>
-      <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
-    </ion-card-header>
-    <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
-  
+    <div (click)="goToDetails(game.titulo)">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="game.urlImage" />
+        </ion-avatar>
+        <ion-label>
+          <h3 [innerHTML]="game.director"></h3>
+          <p [innerHTML]="game.fecha"></p>
+        </ion-label>
+      </ion-item>
+
+      <img [src]="game.urlImage" alt="ion" />
+      <ion-card-header>
+        <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
+      </ion-card-header>
+      <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
+    </div>
+
     <ion-footer>
       <ion-row align="center">
         <ion-col center text-center>
           <button>
-            <ion-icon name="cash-outline"></ion-icon>
-            <div [innerHTML]="game.precio + ' €'"></div>
+            <ion-button>
+              <ion-icon color="light" slot="cash-outline" name="cart-outline"></ion-icon>
+              <div *ngIf="game.precio != null" [innerHTML]="game.precio + ' €'"></div>
+              <div *ngIf="game.precio == null" [innerHTML]="'Pendiente...'"></div>
+            </ion-button>
           </button>
         </ion-col>
         <ion-col center text-center>
           <button>
-            <ion-icon name="document-text-outline"></ion-icon>
-            <div>Comentarios</div>
-          </button>
-        </ion-col>
-        <ion-col center text-center>
-          <button>
-            <ion-icon name="cart-outline"></ion-icon>
-            <div>Añadir al carrito</div>
+            <ion-button *ngIf="game.stock > 0">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+              <span>Agregar al carrito</span>
+            </ion-button>
+            <ion-button (click)="sinStock()" style="--background:gray" *ngIf="game.stock == 0">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+              <span>Sin stock</span>
+            </ion-button>
+            <ion-button style="--background:gray" *ngIf="game.stock == null">
+              <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
+              <span>Pendiente...</span>
+            </ion-button>
           </button>
         </ion-col>
       </ion-row>
@@ -57,34 +70,29 @@
 
 <ion-content *ngIf="videogamesFiltered.length > 0" class="contenido">
   <ion-card *ngFor="let game of videogamesFiltered">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img [src]="game.urlImage">
-      </ion-avatar>
-      <ion-label>
-        <h3 [innerHTML]="game.director"></h3>
-        <p [innerHTML]="game.fecha"></p>
-      </ion-label>
-    </ion-item>
-  
-    <img [src]="game.urlImage" alt="ion">
-    <ion-card-header>
-      <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
-    </ion-card-header>
-    <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
-  
+    <div (click)="goToDetails(game.titulo)">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="game.urlImage" />
+        </ion-avatar>
+        <ion-label>
+          <h3 [innerHTML]="game.director"></h3>
+          <p [innerHTML]="game.fecha"></p>
+        </ion-label>
+      </ion-item>
+
+      <img [src]="game.urlImage" alt="ion" />
+      <ion-card-header>
+        <ion-card-title [innerHTML]="game.titulo"></ion-card-title>
+      </ion-card-header>
+      <ion-card-content [innerHTML]="game.descripcion"></ion-card-content>
+    </div>
     <ion-footer>
       <ion-row align="center">
         <ion-col center text-center>
           <button>
             <ion-icon name="cash-outline"></ion-icon>
             <div [innerHTML]="game.precio + ' €'"></div>
-          </button>
-        </ion-col>
-        <ion-col center text-center>
-          <button>
-            <ion-icon name="document-text-outline"></ion-icon>
-            <div>Comentarios</div>
           </button>
         </ion-col>
         <ion-col center text-center>
