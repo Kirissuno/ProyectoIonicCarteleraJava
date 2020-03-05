@@ -21,7 +21,6 @@ export class Tab2Page {
     private router : Router,
     private toastCtrl : ToastController,
     private tab3 : Tab3Page,
-    private cartService : ShopCartService
     )
   {
     this.logged = false;
