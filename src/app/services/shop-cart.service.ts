@@ -36,4 +36,8 @@ export class ShopCartService {
     return this.http.get(`${this.baseURL}/${user}/${game}`);
   }
 
+  sendMail(cart : Cart[], user : string): Observable<any>{
+    return this.http.post(`${this.baseURL}/sendMail/${user}`, cart)
+  }
+
 }

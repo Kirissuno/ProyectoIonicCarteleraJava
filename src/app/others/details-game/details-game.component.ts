@@ -36,10 +36,11 @@ export class DetailsGameComponent implements OnInit {
     private toastCtrl: ToastController,
     private loginService : LoginService,
   ) {
-
+    this.loggedUser = new User();
   }
 
   ngOnInit() {
+    this.loggedUser = new User();
     this.titulo = this.route.snapshot.params['titulo'];
 
     this.videogameService.getByTitle(this.titulo).subscribe(data => {
@@ -138,6 +139,12 @@ export class DetailsGameComponent implements OnInit {
         this.isAdmin = true;
       }
     }
+  }
+
+  deleteComment(comment:Comment){
+    this.commentService.deleteComment(comment.id).subscribe( () => {
+      this.ngOnInit();
+    } )
   }
 
 }

@@ -133,14 +133,9 @@ export class Tab3Page {
   }
 
   sendMail(){
-    let email = {
-      to: 'arfilip.1h@gmail.com',
-      subject: 'Compra',
-      body: `El usuario ${this.loggedUser.usuario} ha comprado ${this.stringArticulos}`,
-      isHtml: true
-    }
-
-    this.emailComposer.open(email);    
+    this.cartService.sendMail(this.articulos, this.loggedUser.usuario).subscribe(()=> {
+      console.log("email enviado");
+    } ) 
   }
 
 }

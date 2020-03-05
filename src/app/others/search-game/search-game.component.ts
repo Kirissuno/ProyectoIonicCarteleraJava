@@ -63,7 +63,7 @@ export class SearchGameComponent implements OnInit {
         //por cada juego
         games.forEach(game => {
           //si su título o companía incluyen la cadena de texto que hemos introducido en el input
-          if(game.titulo.trim().toLocaleLowerCase().includes(this.gameToFilter) || game.director.trim().toLocaleLowerCase().includes(this.gameToFilter) ){
+          if(game.titulo.trim().toLocaleLowerCase().includes(this.gameToFilter.toLocaleLowerCase()) || game.director.trim().toLocaleLowerCase().includes(this.gameToFilter.toLocaleLowerCase()) ){
             //se añadirá dicho videojuego al nuevo array de filtro
             this.videogamesFiltered.push(game);
           }

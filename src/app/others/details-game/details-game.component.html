@@ -46,6 +46,11 @@
           </ion-card-header>
           <ion-card-content>
             <div *ngFor="let comment of comments">
+              <div align="right">
+              <ion-button (click)="deleteComment(comment)" *ngIf="isAdmin || loggedUser.usuario == comment.usuario">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </div>
               <p>{{comment.comentario}}</p>
               <p align="right">by: {{comment.usuario}}</p>
               <hr color="black">
@@ -61,7 +66,8 @@
                       </ion-item>
                     </div>
                     <div padding>
-                      <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Comentar</ion-button>
+                      <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Comentar
+                      </ion-button>
                     </div>
                   </ion-col>
                 </ion-row>
