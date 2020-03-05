@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user';
 import { Observable } from 'rxjs';
-import { Videogame } from '../models/videogame';
+import { Cart } from '../models/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,8 @@ export class ShopCartService {
 
   constructor(private http : HttpClient) { }
 
-  getUserCart(user : string): Observable<any>{
-    return this.http.get(`${this.baseURL}/${user}`);
+  getUserCart(user : string): Observable<Cart[]>{
+    return this.http.get<Cart[]>(`${this.baseURL}/${user}`);
   }
 
   addGame(user: string, game : string): Observable<any>{

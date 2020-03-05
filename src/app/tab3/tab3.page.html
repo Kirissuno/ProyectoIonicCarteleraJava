@@ -6,6 +6,11 @@
       </ion-button>
       <span style="padding-top: 2%; color: white; font-size: 14px;">VOLVER</span>
     </ion-buttons>
+    <ion-buttons (click)="refresh()" slot="end">
+      <ion-button>
+        <ion-icon color="success" slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,8 +20,8 @@
     <ion-row>
       <ion-col>
         <h3>Artículos en el carrito</h3>
-        <div *ngIf="loggedUser != null">
-          <ion-list class="bg-transparent" *ngIf="articulos.length > 0">
+        <div *ngIf="isLogged">
+          <ion-list class="bg-transparent" *ngIf="articulos">
             <ion-item color="none" *ngFor="let game of articulos">
               <ion-label>{{game.videojuego}}</ion-label>
               <ion-icon style="color: red;" slot="end" name="trash-outline" (click)="removeGame(game)"></ion-icon>
@@ -25,6 +30,9 @@
               <ion-icon slot="end" name="add-outline" (click)="oneMore(game)"></ion-icon>
             </ion-item>
           </ion-list>
+          <div padding>
+            <ion-button size="large" type="submit" *ngIf="articulos.length > 0" expand="block" (click)="hacerPedido()">Realizar pedido</ion-button>
+          </div>
         </div>
         <h4 style="color: white;" *ngIf="articulos.length == 0">No hay artículos</h4>
       </ion-col>

@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsGameComponent } from './others/details-game/details-game.component';
 import { ModalNewEditGameComponent } from './others/modal-new-edit-game/modal-new-edit-game.component';
 import { RegisterComponent } from './others/register/register.component';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Tab3Page } from './tab3/tab3.page';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @NgModule({
   declarations: [AppComponent, SearchGameComponent, DetailsGameComponent, ModalNewEditGameComponent, RegisterComponent],
@@ -22,7 +25,10 @@ import { RegisterComponent } from './others/register/register.component';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications,
+    Tab3Page,
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })

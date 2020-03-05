@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { Cart } from '../models/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class LoginService {
   user : User;
 
   constructor(private http : HttpClient) {
+
   }
 
   logIn(username : string): Observable<any> {
     return this.http.get(`${this.baseURL}/${username}`)
   }
-
 
 }

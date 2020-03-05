@@ -7,7 +7,11 @@
       <ion-button (click)="presentModal()">
         <ion-icon color="light" slot="icon-only" name="add-circle-outline"></ion-icon>
       </ion-button>
+      <ion-button (click)="refresh()">
+        <ion-icon color="success" slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
+
     <ion-buttons slot="end">
       <span style="padding-top: 5%; color: white;">Carrito</span>
       <ion-button (click)="goToCart()">
@@ -55,7 +59,7 @@
               <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
               <span>Agregar al carrito</span>
             </ion-button>
-            <ion-button (click)="sinStock() " style="--background:gray" *ngIf="game.stock == 0 && isLogged">
+            <ion-button style="--background:gray" *ngIf="game.stock == 0 && isLogged">
               <ion-icon color="light" slot="icon-only" name="cart-outline"></ion-icon>
               <span>Sin stock</span>
             </ion-button>

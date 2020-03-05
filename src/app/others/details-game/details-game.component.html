@@ -16,6 +16,11 @@
         <ion-icon color="danger" slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons (click)="refresh()" slot="end" *ngIf="isAdmin">
+      <ion-button>
+        <ion-icon color="success" slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

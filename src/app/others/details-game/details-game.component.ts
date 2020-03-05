@@ -121,4 +121,23 @@ export class DetailsGameComponent implements OnInit {
     return await modal.present();
   }
 
+  refresh(){
+    this.titulo = this.route.snapshot.params['titulo'];
+
+    this.videogameService.getByTitle(this.titulo).subscribe(data => {
+      this.videogame = data;
+    })
+    this.commentService.getByGameTitle(this.titulo).subscribe(data => {
+      this.comments = data;
+    })
+
+    this.isLogged = this.loginService.logged;
+    if(this.isLogged){
+      this.loggedUser = this.loginService.user;
+      if(this.loggedUser.rol == "admin"){
+        this.isAdmin = true;
+      }
+    }
+  }
+
 }

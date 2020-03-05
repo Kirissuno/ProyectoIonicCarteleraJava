@@ -39,6 +39,7 @@ export class SearchGameComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.videogameService.getAllGames().subscribe( games => {
       this.videogames = games;
     })
@@ -98,11 +99,11 @@ export class SearchGameComponent implements OnInit {
 
   addToCart(game:Videogame){
     
-    this.shoppingService.getByGameAndUser('admin', game.titulo).subscribe( data=> {
+    this.shoppingService.getByGameAndUser(this.loggedUser.usuario, game.titulo).subscribe( data=> {
       if(data == null || data == undefined){
-        this.shoppingService.addGame('admin', game.titulo).subscribe();
+        this.shoppingService.addGame(this.loggedUser.usuario, game.titulo).subscribe();
       }else{
-        this.shoppingService.oneMore('admin', game.titulo).subscribe();
+        this.shoppingService.oneMore(this.loggedUser.usuario, game.titulo).subscribe();
       }
       this.toastCtrl.create({
         animated: true,
@@ -118,6 +119,21 @@ export class SearchGameComponent implements OnInit {
     } )
 
    
+  }
+
+  refresh(){
+    this.videogameService.getAllGames().subscribe( games => {
+      this.videogames = games;
+    })
+    this.noResult = false;
+    this.videogamesFiltered = [];
+    this.isLogged = this.loginService.logged;
+    if(this.isLogged){
+      this.loggedUser = this.loginService.user;
+      if(this.loggedUser.rol == 'admin'){
+        this.isAdmin = true;
+      }
+    }
   }
 
 }

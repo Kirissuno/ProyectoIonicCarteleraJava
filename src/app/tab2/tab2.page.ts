@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { UserServiceService } from '../services/user-service.service';
 import { ToastController } from '@ionic/angular';
 import { User } from '../models/user';
+import { Tab3Page } from '../tab3/tab3.page';
+import { ShopCartService } from '../services/shop-cart.service';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,14 @@ export class Tab2Page {
   logged : boolean;
   user : User;
 
-  constructor(private loginService: LoginService, private userService:UserServiceService, private router : Router, private toastCtrl : ToastController) {
+  constructor(
+    private loginService: LoginService,
+    private router : Router,
+    private toastCtrl : ToastController,
+    private tab3 : Tab3Page,
+    private cartService : ShopCartService
+    )
+  {
     this.logged = false;
   }
 
@@ -24,8 +32,6 @@ export class Tab2Page {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     if(this.loginService.logged == true){
       this.user = this.loginService.user;
     }
@@ -38,6 +44,9 @@ export class Tab2Page {
         this.loginService.user = data;
         this.logged = true;
         this.user = data;
+        
+        this.tab3.ngOnInit()
+        
       }else{
         this.toastCtrl.create({
           animated: true,
